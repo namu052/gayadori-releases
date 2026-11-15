@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>가야돌이 개인정보처리방침</title>
+<style>
+  :root { --ink: #26372c; --muted: #5d6b61; --line: #e3e0d4; --paper: #fbfaf5; --accent: #2f7d6d; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.7 -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif; word-break: keep-all; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 36px 0 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .meta { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .soon { display: inline-block; font-size: 12px; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0 8px; margin-left: 4px; vertical-align: 2px; }
+  a { color: var(--accent); }
+  @media (max-width: 560px) { table, tbody, tr, th, td { display: block; } th { border-bottom: 0; padding-bottom: 0; } }
+</style>
+</head>
+<body>
+<main>
+<h1>가야돌이 개인정보처리방침</h1>
+<p class="meta">시행일 2026년 11월 15일 · 대상: 가야돌이 데스크톱 펫(Windows·macOS)과 가야돌이 Android 앱</p>
+
+<p>가야돌이는 컴퓨터와 휴대폰 화면에서 함께 지내는 펫 앱입니다. 펫 돌보기는 모두 기기 안에서 이루어지며, 아래의 온라인 기능을 직접 켰을 때만 서버로 정보가 갑니다. 온라인 기능은 <strong>기본으로 꺼져 있고</strong>, 켤 때 동의와 <strong>만 14세 이상</strong> 확인을 받습니다. 만 14세 미만은 온라인 기능을 쓸 수 없습니다.</p>
+
+<h2>1. 모으는 정보와 목적</h2>
+<table>
+<tr><th>계정</th><td>무작위 계정 ID. 처음 가입할 때 자동 가입을 막기 위해 Cloudflare Turnstile 확인을 한 번 거칩니다.</td></tr>
+<tr><th>카카오·구글 로그인 <span class="soon">도입 예정</span></th><td>여러 기기에서 같은 계정을 쓰려고 로그인을 고른 경우에만 받습니다. 카카오는 회원 번호와 닉네임(이메일은 받지 않음), 구글은 계정 식별자·이름·이메일·프로필 사진 주소입니다. 로그인 확인에만 쓰며 다른 사용자에게 보이지 않습니다.</td></tr>
+<tr><th>펫</th><td>펫 ID, 이름, 성별, 세대, 성장 단계. 맞선 광장·친구 목록에서 다른 사용자에게 이름·성별·세대만 보입니다.</td></tr>
+<tr><th>기기 사이 이동 <span class="soon">도입 예정</span></th><td>펫이 PC와 휴대폰 사이를 옮겨 다닐 때 펫 기록(돌봄 수치·생애 기록·함께 보낸 시간)의 사본, 지금 펫이 있는 기기, 연결된 기기 목록(기기 종류·이름·마지막 접속 시각), 휴대폰 알림 토큰(FCM). 위치 정보는 서버로 보내지 않습니다.</td></tr>
+<tr><th>맞선·결혼·방문</th><td>맞선 신청, 짝, 데이트·결혼·이혼·방문 기록과 시각, 결혼해 이사 간 펫의 생애 기록.</td></tr>
+<tr><th>친구·메시지</th><td>친구 관계, 친구·가족·수다방에서 나눈 메시지(전화번호·SNS 아이디·링크는 서버가 가림), 읽은 시점, 차단·신고 기록.</td></tr>
+<tr><th>펫 대화</th><td>펫이 알아듣지 못한 말 한 줄과 펫 이름·단계·기분. 답을 만들려고 OpenAI에 보내며 우리 서버에는 저장하지 않습니다.</td></tr>
+<tr><th>옮기기 코드</th><td>다른 PC로 옮길 때 일회용 코드의 해시와 로그인 갱신 토큰(최대 10분).</td></tr>
+</table>
+<p><strong>IP 주소는 저장하지 않습니다.</strong> 이름·전화번호·주소는 받지 않습니다(구글 로그인을 고르면 구글이 넘겨주는 이름·이메일만 예외).</p>
+
+<h2>2. 보관 기간</h2>
+<ul>
+<li>계정·펫·결혼 기록: 계정을 지울 때까지</li>
+<li>메시지: 30일 뒤 자동 삭제(친구를 끊거나 이혼하면 바로 삭제)</li>
+<li>옮기기 코드의 토큰: 10분 이내, 해시와 결과는 최대 30일</li>
+<li>펫 대화 호출 기록(시각·사용량): 이틀</li>
+<li>기기 사이 이동용 펫 기록 사본: 다음 기기가 받으면 이전 사본은 지움 <span class="soon">도입 예정</span></li>
+<li>신고된 메시지의 사본: 악용 대응을 위해 처리할 때까지(계정을 지워도 남음)</li>
+</ul>
+
+<h2>3. 처리를 맡기는 곳과 국외 이전</h2>
+<table>
+<tr><th>Supabase</th><td>서버와 데이터베이스, 로그인 처리. 대한민국 서울 지역.</td></tr>
+<tr><th>Cloudflare, Inc.(미국)</th><td>첫 가입 때 자동 가입 확인(Turnstile). 확인 순간 IP 주소와 브라우저 신호가 전송됩니다. 보관은 Cloudflare 방침을 따릅니다.</td></tr>
+<tr><th>OpenAI, L.L.C.(미국)</th><td>펫 대화의 답 만들기. 보낼 때마다 그 말 한 줄과 펫 이름·단계·기분을 전송하며, OpenAI가 악용 방지를 위해 최대 30일 보관할 수 있습니다.</td></tr>
+<tr><th>카카오(대한민국)·Google LLC(미국) <span class="soon">도입 예정</span></th><td>사용자가 고른 로그인 확인. 로그인할 때마다 해당 회사의 로그인 화면을 거칩니다.</td></tr>
+<tr><th>Google LLC(미국) — Firebase Cloud Messaging <span class="soon">도입 예정</span></th><td>펫이 휴대폰으로 옮겨 올 때 휴대폰 앱을 깨우는 알림. 알림 토큰과 "옮겨 옴" 신호만 보냅니다.</td></tr>
+</table>
+
+<h2>4. 기기에 남는 정보</h2>
+<p>로그인 정보는 운영체제의 안전한 저장소(macOS 키체인, Windows 자격 증명 관리자, Android 키 저장소)에만 둡니다. 펫 기록은 기기 안 파일에 있습니다. 휴대폰 앱은 화면이 켜진 시간을 기기 안에서만 세어 펫과 함께 보낸 시간으로 기록합니다.</p>
+
+<h2>5. 끄기·지우기와 이용자의 권리</h2>
+<ul>
+<li>온라인 기능은 앱 설정에서 언제든 끌 수 있습니다.</li>
+<li>「서버 기록 지우기」로 계정·펫·메시지·친구·차단 기록을 지울 수 있습니다(되돌릴 수 없음). 신고된 메시지의 사본은 남습니다.</li>
+<li>내 정보의 열람·정정·삭제·처리 정지를 요청할 수 있습니다. 아래 문의처로 알려 주세요.</li>
+</ul>
+
+<h2>6. 문의</h2>
+<p>개인정보 관련 문의와 요청은 <a href="https://github.com/namu052/gayadori-releases/issues">GitHub 문의 게시판</a>에 남겨 주세요. 내용을 바꾸면 이 페이지와 앱 안 동의 화면에 알리고, 서버로 가는 정보가 바뀌면 다시 동의를 받습니다.</p>
+</main>
+</body>
+</html>
