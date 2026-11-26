@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  가야돌이 친구 초대 링크 페이지 (design-doc 0045 §2). Published as https://namu052.github.io/gayadori-releases/f/
+  (GitHub Pages of the releases repo, next to privacy/). The invite token rides after `#`, so it never reaches GitHub:
+  this page only hands it to the app (`gayadori://friend/<token>`; on Android an `intent://` address naming the app) and
+  shows it for pasting when the app does not open. No external script, style, font, image or analytics.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-nNOjPqZA6XL03pTToBOJ6J4xvkWd0VsU91xJ/7WLpfc='; base-uri 'none'; form-action 'none'">
+<title>가야돌이 친구 초대</title>
+<style>
+  body { margin: 0; background: #fbf8f3; color: #3d3a36; font: 16px/1.6 system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  main { max-width: 440px; margin: 0 auto; padding: 32px 20px 48px; }
+  h1 { font-size: 24px; margin: 0 0 6px; }
+  .card { margin: 18px 0; padding: 16px 18px; border-radius: 16px; background: #fff; border: 1px solid #ece4d8; }
+  .open { display: block; width: 100%; box-sizing: border-box; padding: 14px 16px; border-radius: 12px; background: #8d4a61; color: #fff; text-align: center; font-weight: 700; text-decoration: none; font-size: 17px; }
+  .hint { color: #7a746c; font-size: 14px; margin: 8px 0; }
+  .link { word-break: break-all; user-select: all; background: #f6f2ec; padding: 10px 12px; border-radius: 10px; font-size: 14px; }
+  button { margin-top: 8px; min-height: 44px; padding: 8px 14px; border-radius: 10px; border: 1px solid #d9d0c2; background: #fff; font: inherit; font-size: 15px; }
+  .bad { color: #a2463f; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>가야돌이 친구 초대</h1>
+  <p class="hint">친구가 가야돌이 친구 초대 링크를 보냈어요.</p>
+  <section class="card" id="ok" hidden>
+    <a class="open" id="open" href="#">가야돌이 앱에서 열기</a>
+    <p class="hint">앱이 열리면 초대한 친구의 펫 이름이 보이고, 「친구 신청」을 누르면 신청이 가요. 친구가 받아 주면 친구가 돼요.</p>
+  </section>
+  <section class="card" id="paste" hidden>
+    <strong>앱이 열리지 않나요?</strong>
+    <p class="hint">가야돌이 앱(PC는 메신저, 휴대폰은 「친구」 탭) → 「친구 추가」 → 「코드·링크로 찾기」에 아래 링크를 붙여 넣으세요.</p>
+    <div class="link" id="link"></div>
+    <button type="button" id="copy">링크 복사</button>
+    <p class="hint" id="copied" role="status"></p>
+  </section>
+  <section class="card bad" id="broken" hidden>링크가 잘못됐어요. 초대한 친구에게 다시 보내 달라고 해 주세요.</section>
+  <p class="hint">이 페이지는 아무것도 저장하거나 보내지 않아요. 링크 속 초대 표시는 주소의 # 뒤에 있어서 이 페이지를 연 서버에도 가지 않아요.</p>
+</main>
+<script>
+(function () {
+  var token = (location.hash || '').slice(1);
+  if (!/^[A-Za-z0-9_-]{22}$/.test(token)) { document.getElementById('broken').hidden = false; return; }
+  var android = /Android/i.test(navigator.userAgent);
+  // Without the app, Android comes back here (?stay: no automatic try) instead of a store page that does not exist.
+  var stay = /(^|[?&])stay(&|$)/.test(location.search.slice(1));
+  var back = location.origin + location.pathname + '?stay#' + token;
+  var app = android
+    ? 'intent://friend/' + token + '#Intent;scheme=gayadori;package=kr.gayadori.pet;S.browser_fallback_url=' + encodeURIComponent(back) + ';end'
+    : 'gayadori://friend/' + token;
+  var open = document.getElementById('open');
+  open.href = app;
+  document.getElementById('ok').hidden = false;
+  document.getElementById('paste').hidden = false;
+  document.getElementById('link').textContent = location.href;
+  document.getElementById('copy').addEventListener('click', function () {
+    var done = function (text) { document.getElementById('copied').textContent = text; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(location.href).then(function () { done('복사했어요.'); }, function () { done('링크를 길게 눌러 복사해 주세요.'); });
+    } else { done('링크를 길게 눌러 복사해 주세요.'); }
+  });
+  // Try the app once by itself; in-app browsers that block it still let the button through.
+  if (!stay) setTimeout(function () { location.href = app; }, 300);
+})();
+</script>
+</body>
+</html>
