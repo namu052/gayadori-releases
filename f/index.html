@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-nNOjPqZA6XL03pTToBOJ6J4xvkWd0VsU91xJ/7WLpfc='; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-Ep/HBmp3QhAOgW+QXf4BVdUsj76GWdEveWBsdKH6ZsI='; base-uri 'none'; form-action 'none'">
 <title>가야돌이 친구 초대</title>
 <style>
   body { margin: 0; background: #fbf8f3; color: #3d3a36; font: 16px/1.6 system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
@@ -51,6 +51,8 @@
   var android = /Android/i.test(navigator.userAgent);
   // Without the app, Android comes back here (?stay: no automatic try) instead of a store page that does not exist.
   var stay = /(^|[?&])stay(&|$)/.test(location.search.slice(1));
+  // What is shown and copied is always the plain invite link, never this page's own `?stay` address.
+  var link = location.origin + location.pathname + '#' + token;
   var back = location.origin + location.pathname + '?stay#' + token;
   var app = android
     ? 'intent://friend/' + token + '#Intent;scheme=gayadori;package=kr.gayadori.pet;S.browser_fallback_url=' + encodeURIComponent(back) + ';end'
@@ -59,11 +61,11 @@
   open.href = app;
   document.getElementById('ok').hidden = false;
   document.getElementById('paste').hidden = false;
-  document.getElementById('link').textContent = location.href;
+  document.getElementById('link').textContent = link;
   document.getElementById('copy').addEventListener('click', function () {
     var done = function (text) { document.getElementById('copied').textContent = text; };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(location.href).then(function () { done('복사했어요.'); }, function () { done('링크를 길게 눌러 복사해 주세요.'); });
+      navigator.clipboard.writeText(link).then(function () { done('복사했어요.'); }, function () { done('링크를 길게 눌러 복사해 주세요.'); });
     } else { done('링크를 길게 눌러 복사해 주세요.'); }
   });
   // Try the app once by itself; in-app browsers that block it still let the button through.
